@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tokyo Private Dining Venue Research</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f4f0;
+      color: #2c2c2c;
+    }
+
+    /* Cover */
+    .cover {
+      background: #1c3144;
+      color: #fff;
+      padding: 52px 48px 40px;
+    }
+    .cover-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8aaccc;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      line-height: 1.3;
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      font-size: 12px;
+      color: #8aaccc;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 22px;
+    }
+    .cover-meta div strong { display: block; color: #d6e8f5; font-size: 13px; margin-bottom: 2px; }
+
+    /* Container */
+    .container { max-width: 860px; margin: 0 auto; padding: 44px 32px; }
+
+    /* Brief */
+    .brief {
+      background: #fff;
+      border-left: 3px solid #c0973e;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      border-radius: 0 4px 4px 0;
+    }
+    .brief-label {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #c0973e;
+      margin-bottom: 10px;
+    }
+    .brief p { font-size: 0.87rem; color: #555; line-height: 1.7; margin: 0; }
+
+    /* Section */
+    .section { margin-bottom: 48px; }
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0dbd4;
+      margin-bottom: 20px;
+    }
+    h2 { font-size: 1.15rem; font-weight: 600; color: #1c3144; margin-bottom: 16px; }
+    p { font-size: 0.88rem; line-height: 1.8; color: #505060; margin-bottom: 12px; }
+
+    /* Summary Bar */
+    .summary-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .sum-card {
+      background: #fff;
+      border: 1px solid #e0dbd4;
+      padding: 14px 16px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .sum-num { font-size: 1.4rem; font-weight: 700; color: #1c3144; display: block; }
+    .sum-label { font-size: 0.7rem; color: #888; margin-top: 2px; line-height: 1.3; }
+
+    /* Venue Cards */
+    .venue-card {
+      background: #fff;
+      border: 1px solid #e0dbd4;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .venue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid #f0ece6;
+    }
+    .venue-name { font-size: 1rem; font-weight: 700; color: #1c3144; margin-bottom: 3px; }
+    .venue-sub { font-size: 0.78rem; color: #888; }
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-rec { background: #e8f5e9; color: #2e7d32; }
+    .badge-alt { background: #fff8e1; color: #f57f17; }
+    .badge-ref { background: #fce4ec; color: #c62828; }
+
+    .venue-body { padding: 16px 22px; }
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .venue-field label {
+      display: block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #aaa;
+      margin-bottom: 3px;
+    }
+    .venue-field span { font-size: 0.82rem; font-weight: 600; color: #2c2c2c; }
+
+    .inquiry-note {
+      background: #f9f7f3;
+      border-radius: 4px;
+      padding: 11px 14px;
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.6;
+      border-left: 2px solid #c0973e;
+    }
+    .inquiry-note strong { color: #1c3144; }
+
+    /* Process */
+    .process-steps {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: #ddd;
+    }
+    .step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding-top: 44px;
+    }
+    .step-num {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: #1c3144;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+    .step h4 { font-size: 0.78rem; font-weight: 700; color: #1c3144; margin-bottom: 4px; }
+    .step p { font-size: 0.73rem; color: #888; margin: 0; line-height: 1.5; }
+
+    /* Footer */
+    footer {
+      background: #1c3144;
+      color: #8aaccc;
+      font-size: 0.73rem;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer strong { color: #d6e8f5; }
+
+    @media(max-width:640px){
+      .summary-bar{grid-template-columns:1fr 1fr;}
+      .venue-grid{grid-template-columns:1fr 1fr;}
+      .process-steps{flex-direction:column; gap:24px;}
+      .process-steps::before{display:none;}
+      .step{padding-top:0; display:flex; gap:14px; text-align:left; align-items:flex-start;}
+      .step-num{position:static;transform:none;flex-shrink:0;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">Venue Research &amp; Outreach Report</div>
+  <h1>Tokyo Private Dining<br>Venue Research</h1>
+  <div class="cover-meta">
+    <div><strong>Prepared for</strong>Client: Confidential (HK-based tech startup)</div>
+    <div><strong>Prepared by</strong>Sally — Japanese Virtual Assistant</div>
+    <div><strong>Occasion</strong>Leadership team offsite dinner, 12 persons</div>
+    <div><strong>Date</strong>March 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Brief -->
+  <div class="brief">
+    <div class="brief-label">Client Brief</div>
+    <p>A Hong Kong-based technology company visiting Tokyo for a 3-day offsite requested research on private dining venues suitable for a 12-person leadership dinner. Requirements: private room, Japanese cuisine preferred, accessible from Minato-ku, budget ¥15,000–25,000 per person including drinks. Conducted venue research and direct Japanese-language inquiries on the client's behalf.</p>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <div class="section-label">Summary</div>
+    <div class="summary-bar">
+      <div class="sum-card"><span class="sum-num">8</span><span class="sum-label">Venues initially identified</span></div>
+      <div class="sum-card"><span class="sum-num">5</span><span class="sum-label">Venues contacted by phone / email (Japanese)</span></div>
+      <div class="sum-card"><span class="sum-num">3</span><span class="sum-label">Confirmed availability for requested date</span></div>
+      <div class="sum-card"><span class="sum-num">1</span><span class="sum-label">Top recommendation (with reservation option)</span></div>
+    </div>
+  </div>
+
+  <!-- Venue Cards -->
+  <div class="section">
+    <div class="section-label">Shortlisted Venues</div>
+    <h2>3 venues confirmed available — details and inquiry notes below.</h2>
+
+    <!-- Venue 1 -->
+    <div class="venue-card">
+      <div class="venue-header">
+        <div>
+          <div class="venue-name">Ginza Kappo Hamasei (銀座割烹 濱清)</div>
+          <div class="venue-sub">Kappo cuisine · Private room · Ginza, Chuo-ku</div>
+        </div>
+        <span class="badge badge-rec">★ Top Recommendation</span>
+      </div>
+      <div class="venue-body">
+        <div class="venue-grid">
+          <div class="venue-field"><label>Capacity</label><span>8–14 persons</span></div>
+          <div class="venue-field"><label>Price / person</label><span>¥18,000–22,000</span></div>
+          <div class="venue-field"><label>Private Room</label><span>Yes (tatami)</span></div>
+          <div class="venue-field"><label>Availability</label><span>✓ Confirmed</span></div>
+        </div>
+        <div class="inquiry-note">
+          <strong>Inquiry note:</strong> Spoke directly with manager (Japanese). Private room available on requested dates. English-speaking staff on request. Dietary accommodations (vegetarian, halal) require 3 days advance notice. Reservation deposit ¥10,000 required. Highly professional response — strongly recommended.
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue 2 -->
+    <div class="venue-card">
+      <div class="venue-header">
+        <div>
+          <div class="venue-name">Toranomon Hills Club — Japanese Restaurant</div>
+          <div class="venue-sub">Modern Japanese · Semi-private · Toranomon, Minato-ku</div>
+        </div>
+        <span class="badge badge-alt">Alternative</span>
+      </div>
+      <div class="venue-body">
+        <div class="venue-grid">
+          <div class="venue-field"><label>Capacity</label><span>10–20 persons</span></div>
+          <div class="venue-field"><label>Price / person</label><span>¥20,000–25,000</span></div>
+          <div class="venue-field"><label>Private Room</label><span>Semi-private divider</span></div>
+          <div class="venue-field"><label>Availability</label><span>✓ Confirmed</span></div>
+        </div>
+        <div class="inquiry-note">
+          <strong>Inquiry note:</strong> Responded promptly via email (Japanese + English available). Higher price point, but strong location advantage — walking distance from Toranomon Hills hotel. Business-oriented atmosphere. Full English menu available.
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue 3 -->
+    <div class="venue-card">
+      <div class="venue-header">
+        <div>
+          <div class="venue-name">Akasaka Kikunoi Annex (赤坂 菊乃井 別亭)</div>
+          <div class="venue-sub">Kaiseki cuisine · Private room · Akasaka, Minato-ku</div>
+        </div>
+        <span class="badge badge-alt">Alternative</span>
+      </div>
+      <div class="venue-body">
+        <div class="venue-grid">
+          <div class="venue-field"><label>Capacity</label><span>6–10 persons</span></div>
+          <div class="venue-field"><label>Price / person</label><span>¥25,000–35,000</span></div>
+          <div class="venue-field"><label>Private Room</label><span>Yes (individual room)</span></div>
+          <div class="venue-field"><label>Availability</label><span>✓ Confirmed</span></div>
+        </div>
+        <div class="inquiry-note">
+          <strong>Inquiry note:</strong> Premium kaiseki experience. Slightly over budget per person, but exceptional for a high-profile dinner. Wait time for response was 2 business days. Reservation requires full prepayment. Note: capacity is 10 max — may be tight for 12 persons.
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Not Available -->
+    <div class="venue-card" style="opacity:0.6;">
+      <div class="venue-header">
+        <div>
+          <div class="venue-name">2 Additional Venues Contacted</div>
+          <div class="venue-sub">Not available on requested date</div>
+        </div>
+        <span class="badge badge-ref">Not Available</span>
+      </div>
+      <div class="venue-body">
+        <p style="font-size:0.82rem;color:#888;margin:0;">Both venues confirmed fully booked for the requested date range. Details available upon request.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="section">
+    <div class="section-label">How This Was Done</div>
+    <h2>All outreach conducted natively in Japanese.</h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Initial Research</h4>
+          <p>Identified 8 candidates via Tabelog, Hot Pepper, and direct referrals</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Shortlisting</h4>
+          <p>Filtered by capacity, location, price, and private room availability</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Direct Outreach</h4>
+          <p>Called and emailed top 5 in Japanese — confirmed details and availability</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>English Report</h4>
+          <p>Compiled all confirmed venues into this structured report for client decision</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>Prepared by <strong>Sally</strong> — Japanese Virtual Assistant</div>
+  <div>Confidential — for client use only</div>
+</footer>
+
+</body>
+</html>
